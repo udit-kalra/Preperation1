@@ -1,20 +1,26 @@
 package com.example.prep1.kotlinCoroutines
 
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import kotlin.concurrent.thread
 
 
-fun main(){
+fun main()= runBlocking{
 
     println("Main Program Starts ${Thread.currentThread().name}")
 
-    GlobalScope.launch {
+    var deferred: Deferred<Unit> =GlobalScope.async {
         println("Other thread Starts ${Thread.currentThread().name}")
-        Thread.sleep(1000)
+        myDelayFun(1000)
         println("Other thread ends ${Thread.currentThread().name}")
     }
-    Thread.sleep(2000)
+
+    var value:Unit=deferred.await()
+//    deferred.join()
 
     println("Main Program ends ${Thread.currentThread().name}")
+}
+
+suspend fun myDelayFun(time : Long){
+
+    delay(1000)
 }

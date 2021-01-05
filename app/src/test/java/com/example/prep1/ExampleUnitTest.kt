@@ -1,5 +1,7 @@
 package com.example.prep1
 
+import com.example.prep1.kotlinCoroutines.myDelayFun
+import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -13,5 +15,12 @@ class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)
+    }
+
+    @Test
+    fun testCoroutines(){
+        runBlocking {
+            myDelayFun(1000)
+        }
     }
 }
